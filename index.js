@@ -1,4 +1,4 @@
-// Used Module 18 activity 22 as a reference
+// Used Module 18 activity 23 as a reference
 const express = require("express");
 const db = require("./config/connection");
 const routes = require("./routes");
