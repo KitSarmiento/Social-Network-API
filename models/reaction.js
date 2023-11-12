@@ -3,7 +3,7 @@
 
 const mongoose = require("mongoose");
 
-const reactionSchema = new mongoose.Schema({
+const reaction = new mongoose.Schema({
   reactionId: {
     type: mongoose.Schema.Types.ObjectId,
     default: () => new mongoose.Types.ObjectId(),
@@ -24,4 +24,4 @@ const reactionSchema = new mongoose.Schema({
   },
 });
 
-module.exports = reactionSchema;
+module.exports = reaction;
