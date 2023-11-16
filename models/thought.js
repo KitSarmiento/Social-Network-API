@@ -1,6 +1,6 @@
 //Used Module 18 NOSQL Challenge as a reference to set up the thought model.
 const { Schema, model } = require("mongoose");
-const reactionSchema = require("./reactionSchema");
+const reactionSchema = require("./Reaction");
 
 const thoughtSchema = new Schema({
   thoughtText: {
