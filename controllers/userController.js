@@ -1,6 +1,7 @@
 const User = require("../models/user");
 
 module.exports = {
+  // Get a list of users
   async getUsers(req, res) {
     try {
       const users = await User.find().populate("thoughts").populate("friends");
@@ -9,6 +10,8 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+
+  // Get a list of user by ID
   async getUserById(req, res) {
     try {
       const user = await User.findOne({ _id: req.params.userId })
@@ -25,6 +28,8 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+
+  // Create a user
   async createUser(req, res) {
     try {
       const dbUserData = await User.create(req.body);
@@ -33,6 +38,8 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+
+  // Update a user
   async updateUser(req, res) {
     const { userId } = req.params;
     const { username, email } = req.body;
@@ -51,7 +58,7 @@ module.exports = {
     }
   },
 
-  // Delete a user and associated thoughts if any
+  // Delete a user
   async deleteUser(req, res) {
     const { userId } = req.params;
     try {
@@ -72,13 +79,13 @@ module.exports = {
         }
       }
 
-      // User has been successfully deleted
       res.json({ message: "User has been deleted." });
     } catch (error) {
       res.status(500).json({ error: "Failed to delete the user." });
     }
   },
 
+  // Add a friend by using their ID (user ID and Friend ID)
   async addFriend(req, res) {
     const { userId, friendId } = req.params;
     try {
@@ -93,6 +100,7 @@ module.exports = {
     }
   },
 
+  // Remove a friend by using their ID (user ID and Friend ID)
   async removeFriend(req, res) {
     const { userId, friendId } = req.params;
     try {

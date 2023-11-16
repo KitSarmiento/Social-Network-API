@@ -3,7 +3,6 @@ const { Thought, User } = require("../models");
 module.exports = {
   // Retrieve all thoughts
   async getThoughts(req, res) {
-    // Try to retrieve all thoughts and populate their reactions
     try {
       const thoughts = await Thought.find().populate("reactions");
       res.json(thoughts);
@@ -12,7 +11,7 @@ module.exports = {
     }
   },
 
-  // Retrieve a single thought by its ID
+  // Retrieve a thought by its ID
   async getThoughtById(req, res) {
     const { thoughtId } = req.params;
     try {
@@ -33,7 +32,6 @@ module.exports = {
       const thought = await Thought.create({ thoughtText, username, userId });
       res.status(201).json(thought);
 
-      // Update associated user's thoughts
       await User.findByIdAndUpdate(userId, {
         $push: { thoughts: thought._id },
       });
@@ -42,7 +40,7 @@ module.exports = {
     }
   },
 
-  // Update an existing thought
+  // Update a thought
   async updateThought(req, res) {
     const { thoughtId } = req.params;
     const { thoughtText } = req.body;
@@ -61,8 +59,7 @@ module.exports = {
     }
   },
 
-  // Delete a thought and remove its reference from associated users
-  // Delete a thought and remove its reference from associated users
+  // Delete a thought
   async deleteThought(req, res) {
     const { thoughtId } = req.params;
     try {
